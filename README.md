@@ -1,41 +1,131 @@
-# ConnectRuby
+# Globe Connect for Ruby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/connect_ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Introduction
+Globe Connect for Ruby platform provides an implementation of Globe APIs e.g Authentication, Amax,
+Sms etc. that is easy to use and can be integrated in your existing Ruby application. Below shows
+some samples on how to use the API depending on the functionality that you need to integrate in your
+application.
 
-TODO: Delete this and the text above, and describe your gem
+## Basic Usage
 
-## Installation
-
-Add this line to your application's Gemfile:
+###### Figure 1. Authentication
 
 ```ruby
-gem 'connect_ruby'
+require 'globe_connect'
+
+authenticate = Authentication.new
+url = authenticate.get_access_url('[APP ID]')
+
+response = authenticate.get_access_token('[APP ID]', '[APP_SECRET]', '[CODE]')
+
+puts response
 ```
 
-And then execute:
+###### Figure 2. Amax
 
-    $ bundle
+```ruby
+require 'globe_connect'
 
-Or install it yourself as:
+amax = Amax.new('[APP ID]', '[APP SECRET]')
+response = amax.send_reward_request('[ADDRESS]', '[PROMO NAME]', '[TOKEN]')
 
-    $ gem install connect_ruby
+puts response
+```
 
-## Usage
+###### Figure 3. Binary SMS
 
-TODO: Write usage instructions here
+```ruby
+require 'globe_connect'
 
-## Development
+binary = Sms.new('[ACCESS TOKEN]', [SHORT CODE])
+response = binary.send_binary_message('[ADDRESS]', '[MESSAGE]', '[USER DATA HEADER]')
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+puts response
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+###### Figure 4. Location
 
-## Contributing
+```ruby
+require 'globe_connect'
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/connect_ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+location = LocationQuery.new('[ACCESS TOKEN]')
+response = location.get_location('[ADDRESS]', [ACCURACY])
 
+puts response
+```
 
-## License
+###### Figure 5. Payment (Send Payment Request)
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+```ruby
+require 'globe_connect'
 
+payment = Payment.new('[APP ID]', '[APP SECRET]', '[ACCESS TOKEN]')
+
+response = payment.send_payment_request([AMOUNT], '[DESCRIPTION]', '[ADDRESS]', '[END USER ID]', '[TRANSACTION OPERATION STATUS]')
+
+puts response
+```
+
+###### Figure 6. Payment (Get Last Reference ID)
+
+```ruby
+require 'globe_connect'
+
+payment = Payment.new('[APP ID]', '[APP SECRET]')
+response = payment.get_last_reference_code
+
+puts response
+```
+
+###### Figure 7. Sms
+
+```ruby
+require 'globe_connect'
+
+sms = Sms.new('[ACCESS TOKEN]', [SHORT CODE])
+response = sms.send_message('[ADDRESS]', '[MESSAGE]')
+
+puts response
+```
+
+###### Figure 8. Subscriber (Get Balance)
+
+```ruby
+require 'globe_connect'
+
+subscriber = Subscriber.new('[ACCESS TOKEN]')
+response = subscriber.get_subscriber_balance('[ADDRESS]')
+
+puts response
+```
+
+###### Figure 9. Subscriber (Get Reload Amount)
+
+```ruby
+require 'globe_connect'
+
+subscriber = Subscriber.new('[ACCESS TOKEN]')
+response = subscriber.get_subscriber_reload_amount('[ADDRESS]')
+```
+
+###### Figure 10. USSD (Send)
+
+```ruby
+require 'globe_connect'
+
+ussd = Ussd.new('[ACCESS TOKEN]', [SHORT CODE])
+response = ussd.send_ussd_request('[ADDRESS]', '[MESSAGE]', [FLASH])
+
+puts response
+```
+
+###### Figure 11. USSD (Reply)
+
+```ruby
+require 'globe_connect'
+
+ussd = Ussd.new('[ACCESS TOKEN]', [SHORT CODE])
+response = ussd.reply_ussd_request('[ADDRESS]', '[MESSAGE]', '[SESSION ID]', [FLASH])
+
+puts response
+```
