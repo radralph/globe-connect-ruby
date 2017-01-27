@@ -7,13 +7,13 @@ some samples on how to use the API depending on the functionality that you need 
 application.
 
 ## Install
-``
+```
 Gemfile:
 gem 'globe_connect', '~> 1.0', '>= 1.0.1'
 
 Gem Install:
 gem install 'globe_connect'
-``
+```
 ## Basic Usage
 
 ###### Figure 1. Authentication
