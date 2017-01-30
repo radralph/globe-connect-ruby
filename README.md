@@ -92,6 +92,8 @@ puts response
 require 'globe_connect'
 
 sms = Sms.new('[ACCESS TOKEN]', [SHORT CODE])
+#address Format: 9xxxxxxxx
+#eg. 9123456789
 response = sms.send_message('[ADDRESS]', '[MESSAGE]')
 
 puts response

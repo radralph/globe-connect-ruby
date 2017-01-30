@@ -57,7 +57,7 @@ class Sms < Base
   # @return json
   def send_message(address, message, client_correlator = nil)
     # set the address format
-    addressFormat = 'tel:%s'
+    addressFormat = 'tel:+63%s'
 
     # format url
     url = sprintf(SEND_SMS_URL, @short_code, @access_token)
